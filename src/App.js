@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './App.css';
+import Header from './Component/Header/Header';
+import Navbar from './Component/Navbar/Navbar';
+import Profile from './Component/Profile/Profile';
+import { Route } from 'react-router-dom';
+import {  BrowserRouter } from 'react-router-dom';
+import Message from './Component/Message/Message';
+function App(props) {
+  debugger
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header/>
+        <div className='info'>
+          
+          <Navbar/>
+          <Route path='/profile' render={() =><Profile state={props.state}/>}/>
+          <Route path='/message' render={()=><Message state={props.state}/>}/>
+          
+        </div>
     </div>
+    </BrowserRouter>
   );
 }
 

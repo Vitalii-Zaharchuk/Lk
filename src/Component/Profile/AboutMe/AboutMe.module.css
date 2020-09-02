@@ -1,0 +1,15 @@
+.zastavka img{
+    width:1200px;
+    height: 200px;
+}
+.info{
+    margin-top: 20px;
+    display: flex;
+}
+.ava img{
+    width: 200px;
+    height: 200px;
+}
+.me{
+    margin-left: 50px;
+}
