@@ -11,3 +11,6 @@
     line-height: 2;
     font-weight: bold;
 }
+.navbar a:hover{
+    color:gold
+}

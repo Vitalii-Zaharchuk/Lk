@@ -1,6 +1,7 @@
 .zastavka img{
     width:1200px;
     height: 200px;
+    
 }
 .info{
     margin-top: 20px;
@@ -9,6 +10,8 @@
 .ava img{
     width: 200px;
     height: 200px;
+    border: 1px solid white;
+    border-radius: 35px;
 }
 .me{
     margin-left: 50px;

@@ -1,0 +1,35 @@
+.users{
+    margin-top: 20px;
+    margin-left: 100px;
+    line-height: 3;
+    
+}
+.info{
+    
+    display: flex;
+    border: 2px solid blue;
+    border-radius: 10%;
+    margin-bottom: 50px;
+    
+}
+.iconFollow img{
+    height: 80px;
+    width: 80px;
+    border: 1px solid white;
+    border-radius: 25px;
+    
+}
+.nameStatus{
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    color: blue;
+    display: flex;
+}
+.location{
+    margin-left: 80px;
+}
+.follow button{
+    border: 2px solid blue;
+    border-radius: 25px;
+}
