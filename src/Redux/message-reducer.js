@@ -1,5 +1,6 @@
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+
+
 let initialState = {
     dialogData:[
         {id:1 , name:'Andriy'},
@@ -12,44 +13,33 @@ let initialState = {
         {id:2, message:'Bad'},
         {id:3, message:'All'},
         {id:4, message:'good'}
-    ],
-    newMessage:'ds'
+    ]
+    
 }
 const messageReducer = (state = initialState,action) =>{
     switch(action.type){
         case ADD_MESSAGE:{
             let newMessage = {
                 id:5,
-                message:state.newMessage
+                message:action.addNewMessage
                 }
-                let stateCopy = {...state,
-                    messageData:[...state.messageData]
-                }
-                stateCopy.messageData.push(newMessage)
+                return{
+                    ...state,
+                    messageData:[...state.messageData,newMessage]
                 
-                return stateCopy
+                }
+                
             }       
-         case UPDATE_NEW_MESSAGE_TEXT:{
-             let stateCopy = {
-                 ...state
-             }
-            stateCopy.newMessage = action.newText;
-            
-            return stateCopy
-            
-         }   
+         
          default:
             return state     
     }
 }
-export let addMessageAC = () =>{
+export let addMessageAC = (addNewMessage) =>{
     return{
-        type:'ADD-MESSAGE'
+        type:'ADD-MESSAGE',addNewMessage
     }
 }
-export let updateNewMessageTextAC = (newText) =>{
-    return{
-        type:'UPDATE-NEW-MESSAGE-TEXT',newText
-    }
-}
+
+
 export default messageReducer

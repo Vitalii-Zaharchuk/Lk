@@ -10,19 +10,22 @@ import Message from './Component/Message/Message';
 import MessageContainer from './Component/Message/MessageContainer';
 
 import UsersContainer from './Component/Users/UsersContainer';
+import ProfileContainer from './Component/Profile/ProfileContainer';
+import HeaderContainer from './Component/Header/HeaderContainer';
+import Login from './Component/Login/Login';
 function App(props) {
   
   return (
     
     <div className="App">
-        <Header/>
+        <HeaderContainer/>
         <div className='info'>
           
           <Navbar/>
-          <Route path='/profile' render={() =><Profile store={props.store}/>}/>
+          <Route path='/profile/:userId?' render={() =><ProfileContainer store={props.store}/>}/>
           <Route path='/message' render={()=><MessageContainer store={props.store}/>}/>
           <Route path='/users' render={()=><UsersContainer/>}/>
-          
+          <Route path='/login' render={()=><Login/>}/>
         </div>
     </div>
     

@@ -1,9 +1,10 @@
 import React from 'react'
 import s from './Message.module.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink,Redirect } from 'react-router-dom';
 import { addMessageAC, updateNewMessageTextAC } from '../../Redux/message-reducer';
+import { Field, reduxForm } from 'redux-form';
 let Message = (props) =>{
-    
+  
     let DialogItem = (props) =>{
         return(
         <NavLink to={'/dialog' + props.id}>{props.name}</NavLink>
@@ -17,13 +18,16 @@ let Message = (props) =>{
     }
     let MessageElement = props.messagePage.messageData.map(m=><MessageItem message={m.message} id={m.id}/>)
     let newMessageElement = React.createRef()
-    let addMessage = () =>{
-        props.addMessage()
+    let addMessageReduxForm = (value) =>{
+         props.addMessage(value.addNewMessage)
+    
     }
-    let onMessageChange = () =>{
-        let text = newMessageElement.current.value
-        props.updateNewMessageText(text)
-    }
+    
+        
+      
+
+    
+  
     return(
         <div className={s.message}>
             <div>
@@ -31,11 +35,21 @@ let Message = (props) =>{
             </div>
             <div className={s.dialog}>
                 {MessageElement}
-                <textarea ref={newMessageElement} value={props.messagePage.newMessage} onChange={onMessageChange}/>
-                <button onClick={addMessage}>Send</button>
+                <DialogReduxForm onSubmit={addMessageReduxForm}/>
             </div>
         </div>
     )
 
 }
+const DialogForm = (props) =>{
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <Field component={'textarea'} name={'addNewMessage'}/>
+            <button>Send</button>
+        </form>
+    )
+}
+const DialogReduxForm = reduxForm({form:'dialog'})(DialogForm)
 export default Message
+//<textarea ref={newMessageElement} value={props.messagePage.newMessage} onChange={onMessageChange}/>
+     //           <button onClick={addMessage}>Send</button>
