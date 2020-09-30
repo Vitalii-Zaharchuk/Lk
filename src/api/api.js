@@ -1,4 +1,5 @@
 import *as axios from 'axios'
+import { setUserData } from '../Redux/auth-reducer'
 const instunce = axios.create({
     baseURL:'https://social-network.samuraijs.com/api/1.0/',
     withCredentials:true,
@@ -45,4 +46,16 @@ export const profileAPI = {
     updateStatus(status){
         return instunce.put('profile/status',{status:status})
     }
+}
+export const authAPI ={
+    me(){
+        return instunce.get('auth/me')
+    },
+    login(email,password,rememberMe){
+        return instunce.post('auth/login',{email,password,rememberMe})
+    },
+    logout(){
+        return instunce.delete(`auth/login`)
+    }
+   
 }
