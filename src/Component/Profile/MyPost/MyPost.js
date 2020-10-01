@@ -3,8 +3,8 @@ import React from 'react'
 import { addPostAC, updateNewPostTextAC } from '../../../Redux/profile-reducer'
 import s from './MyPost.module.css'
 
-let MyPost = (props) =>{
-    
+let MyPost = React.memo(props =>{
+    console.log('Df')
     let PostItem = (props) =>{
         return(
         <div to={'/post' + props.id}>{props.post}</div>
@@ -29,5 +29,5 @@ let MyPost = (props) =>{
             <button onClick={addPost}>Push</button>
         </div>
     )
-}
+})
 export default MyPost

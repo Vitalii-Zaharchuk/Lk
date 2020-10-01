@@ -7,11 +7,7 @@ import *as axios from 'axios';
 import { connect } from 'react-redux';
 import { authMeThunk, setUserData ,logoutThunk} from '../../Redux/auth-reducer';
 class HeaderContainer extends React.Component{
-    componentDidMount(){
-        this.props.authMeThunk()
-        
-    
-    }
+   
     render(){
         return(
             <div className={s.header}>  

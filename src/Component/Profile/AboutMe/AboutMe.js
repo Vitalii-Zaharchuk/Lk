@@ -1,8 +1,9 @@
 import React from 'react'
 import s from './AboutMe.module.css'
 import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 let AboutMe = (props) =>{
-    debugger
+    
     if(!props.profile){
         return <h1>wef</h1>
     }
@@ -24,7 +25,7 @@ let AboutMe = (props) =>{
                     
                     <h2>Madrid</h2>
                     <h2>22</h2>
-                    <ProfileStatus status={props.status} 
+                    <ProfileStatusWithHooks status={props.status} 
                         updateStatusThunk={props.updateStatusThunk}/>
                 </div>
             </div>

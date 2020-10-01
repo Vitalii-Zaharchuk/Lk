@@ -21,7 +21,7 @@ let Users = (props) =>{
                         return <span className={props.currentPage === p && s.selectedPage} onClick={(e)=>{props.onPageChange(p);}}>{p}</span>
                     })}
                 </div>
-                {props.usersPage.users.map(u => <div key={u.id} className={s.info}>
+                {props.users.map(u => <div key={u.id} className={s.info}>
                 <div >
                         <div className={s.iconFollow}>
                             <NavLink to={'/profile/' + u.id}><img src={u.photo} /></NavLink>

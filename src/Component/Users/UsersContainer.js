@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {  follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, getUsersThunk, followThunk,unfollowThunk } from '../../Redux/users-reducer'
 import Users from './Users'
+import {getCurrentPage, getTotalUsersCount, getUsers, pageSize} from '../../Redux/users-selector'
 class UsersContainer extends React.Component{
     componentDidMount(){
         
@@ -17,7 +18,7 @@ class UsersContainer extends React.Component{
 
         
         return (
-            <Users usersPage={this.props.usersPage}
+            <Users users={this.props.users}
                     pageSize={this.props.pageSize}
                     totalUsersCount={this.props.totalUsersCount}
                     currentPage={this.props.currentPage}
@@ -34,10 +35,10 @@ class UsersContainer extends React.Component{
 
 let mapStateToProps = (state) =>{
     return{
-        usersPage:state.usersPage,
-        pageSize:state.usersPage.pageSize,
-        totalUsersCount:state.usersPage.totalUsersCount,
-        currentPage:state.usersPage.currentPage
+        users:getUsers(state),
+        pageSize:pageSize(state),
+        totalUsersCount:getTotalUsersCount(state),
+        currentPage:getCurrentPage(state)
     }
 }
 
