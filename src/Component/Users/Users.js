@@ -4,55 +4,28 @@ import { NavLink } from 'react-router-dom';
 import *as axios from 'axios'
 import { usersAPI } from '../../api/api';
 import { follow, followThunk } from '../../Redux/users-reducer';
-let Users = (props) =>{
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-        let pages = [
+import Paginator from '../../common/Paginator/Paginator';
+import User from './User.js/User';
+let Users = (props) => {
 
-        ]
-        for (let i = 1;i<= pagesCount; i++){
-            pages.push(i)
-        }
-        debugger    
-        
-        return (
-            <div className={s.users}>
-                <div>
-                    {pages.map(p =>{
-                        return <span className={props.currentPage === p && s.selectedPage} onClick={(e)=>{props.onPageChange(p);}}>{p}</span>
-                    })}
-                </div>
-                {props.users.map(u => <div key={u.id} className={s.info}>
-                <div >
-                        <div className={s.iconFollow}>
-                            <NavLink to={'/profile/' + u.id}><img src={u.photo} /></NavLink>
-                            
-                        </div>
-                        <div className={s.follow}>
-                        {u.follow? <button onClick={() =>{
-                            props.unfollowThunk(u.id)
-                        }}>Unfollow</button> : 
-                        <button onClick={()=>{
-                        props.followThunk(u.id)
-                        }}>Follow</button>}
-                        
-                        </div>
-                    </div>
-                    <div className={s.nameStatus}>
-                     <div>
-                            <div>{u.name}</div> <div>{u.status}</div>
-                    </div>
-                        <div className={s.location}>
-                            <div>{u.city}</div>
-                            <div>{u.country}</div>
-    
-                        </div>
-                    </div>
-                </div>
-    
-    
-                )}
-            </div>
-        )
+
+
+    return (
+        <div className={s.users}>
+
+            <Paginator totalItemsCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                onPageChange={props.onPageChange}
+            />
+
+            <User
+                users={props.users}
+                unfollowThunk={props.unfollowThunk}
+                followThunk={props.followThunk}
+            />
+        </div>
+    )
 }
 //{u.follow? <button onClick={()=>{
    //axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{withCredentials:true,

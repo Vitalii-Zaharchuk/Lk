@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/api"
+import { updateObjectInArray } from "../utils/validator/object-helpers"
 
 const FOLLOW ='FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -18,13 +19,14 @@ let usersReducer = (state = initialState ,action) =>{
         case FOLLOW:
             return{
                 ...state,
-                users:state.users.map(u=>{
+                users: updateObjectInArray(state.users,'id',action.userId,{follow:true})
+                /*state.users.map(u=>{
                     if(u.id === action.userId){
                         return{...u,follow:true}
                         
                     }
-                    return u
-                })
+                    return u*/
+                
 
             }
         case UNFOLLOW:
@@ -82,30 +84,33 @@ export let setTotalUsersCount = (totalUsersCount) =>{
         type:'SET-TOTAL-USERS-COUNT',totalUsersCount
     }
 }
-export const getUsersThunk = (currentPage,pageSize)=>{
-    return(dispatch) =>{
-        usersAPI.getUsers(currentPage,pageSize).then(data =>{
+export const getUsersThunk = (currentPage,pageSize) => async(dispatch) =>{
+    let data  = await usersAPI.getUsers(currentPage,pageSize);
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
-        })
+}
+const followUnfollow = async (dispatch,apiMethod,togleFollowingProgres,userId) =>{
+    let data = await apiMethod
+        
+    if(data.resultCode === 0){
+        dispatch(togleFollowingProgres)
     }
 }
 export const followThunk = (userId) =>{
-    return (dispatch) =>{
-        usersAPI.follow(userId).then(data=>{
-            if(data.resultCode === 0){
-                dispatch(follow(userId))
-            }
-        })
+    return async (dispatch) =>{
+        let apiMethod = usersAPI.follow(userId)
+        let togleFollowingProgres = follow(userId)
+        followUnfollow(dispatch,apiMethod,togleFollowingProgres,userId)
+       
     }
 }
-export const unfollowThunk = (userId) =>{
-    return (dispatch)=>{
-        usersAPI.unfollow(userId).then(data=>{
-            if(data.resultCode === 0){
-                dispatch(unfollow(userId));
-            }
-        })
+export const unfollowThunk =  (userId) =>{
+    return async (dispatch)=>{
+        let apiMethod = usersAPI.unfollow(userId)
+        let togleFollowingProgres = unfollow(userId)
+        followUnfollow(dispatch,apiMethod,togleFollowingProgres,userId)
+
+        
     }
 }
 export default usersReducer
